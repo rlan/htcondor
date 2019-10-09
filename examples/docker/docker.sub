@@ -1,0 +1,14 @@
+# A docker job example
+# https://htcondor.readthedocs.io/en/v8_9_3/users-manual/docker-universe-applications.html
+
+universe                = docker
+docker_image            = debian
+executable              = /bin/cat
+arguments               = /etc/hosts
+should_transfer_files   = YES
+when_to_transfer_output = ON_EXIT
+output                  = out.$(Process)
+error                   = err.$(Process)
+log                     = log.$(Process)
+request_memory          = 100M
+queue 1
