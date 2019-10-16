@@ -1,7 +1,16 @@
 use ROLE: Execute
 
 use FEATURE : GPUs
-#use FEATURE : StartdCronPeriodic(DYNGPU, 15*60, $(LOCAL_DIR)\dynamic_gpu_info.pl, $(LIBEXEC)\condor_gpu_discovery -dynamic)
 GPU_DISCOVERY_EXTRA = -extra -dynamic
+#use FEATURE : StartdCronPeriodic(DYNGPU, 15*60, $(LOCAL_DIR)\dynamic_gpu_info.pl, $(LIBEXEC)\condor_gpu_discovery -dynamic)
+use FEATURE : StartdCronPeriodic(SHAREGPU, 120, $(LIBEXEC)/gpu_classad.py)
+
+# If ENVIRONMENT_VALUE_FOR_UnAssignedGPUs is:
+# missing
+#   CUDA_VISIBLE_DEVICES = 10000
+# -1
+#   CUDA_VISIBLE_DEVICES = 1
+# none
+#   CUDA_VISIBLE_DEVICES =
 #ENVIRONMENT_VALUE_FOR_UnAssignedGPUs = -1
-ENVIRONMENT_VALUE_FOR_UnAssignedGPUs = none
+#ENVIRONMENT_VALUE_FOR_UnAssignedGPUs = none
